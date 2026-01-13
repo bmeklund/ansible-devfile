@@ -2,7 +2,7 @@ schemaVersion: 2.2.2
 metadata:
   name: ansible-demo
 projects:
-  - name: ansible-devspaces-demo
+  - name: ansible-devfile
     zip:
       location: http://devspaces-dashboard.crw.svc:8080/dashboard/api/airgap-sample/project/download?id=ansible
 components:
@@ -19,43 +19,22 @@ components:
         - /dev/null
       env:
         - name: ANSIBLE_COLLECTIONS_PATH
-          value: ~/.ansible/collections:/usr/share/ansible/collections:/projects/ansible-devspaces-demo/collections
-        - name: KUBEDOCK_ENABLED
-          value: 'true'
-        - name: KUBEDOCK_PARAMS
-          value: "--reverse-proxy --kubeconfig /home/user/.kube/config --initimage quay.io/agiertli/kubedock:0.13.0"
-        - name: CONTAINER_HOST
-          value: 'tcp://127.0.0.1:2475'
-        - name: TESTCONTAINERS_RYUK_DISABLED
-          value: 'true'
-        - name: TESTCONTAINERS_CHECKS_DISABLE
-          value: 'true'
+          value: ~/.ansible/collections:/usr/share/ansible/collections:/projects/ansible-devfile/collections
         - name: HOME
           value: "/projects/home"
         - name: VSCODE_DEFAULT_WORKSPACE
           value: "/projects/ansible-devfile/vscode.code-workspace"
       endpoints:
-        - exposure: none
-          name: kubedock
-          protocol: tcp
-          targetPort: 2475
-        - exposure: public
-          name: http-booster
-          protocol: http
-          targetPort: 8080
-          attributes:
-            discoverable: true
-            urlRewriteSupported: true
-        - exposure: internal
-          name: debug
-          protocol: http
-          targetPort: 5005
+      - exposure: public
+        name: podman
+        protocol: https
+        targetPort: 8080
 commands:
   - id: molecule-create
     exec:
       label: '1.Molecule: start a test pod for the automation'
       commandLine: source $HOME/.bashrc && molecule create
-      workingDir: ${PROJECTS_ROOT}/ansible-devspaces-demo/collections/ansible_collections/sample_namespace/sample_collection/extensions
+      workingDir: ${PROJECTS_ROOT}/ansible-devfile/collections/ansible_collections/sample_namespace/sample_collection/extensions
       group:
         kind: run
         isDefault: true
@@ -64,7 +43,7 @@ commands:
     exec:
       label: '2.Molecule: view the test instance that was created'
       commandLine: source $HOME/.bashrc && molecule list
-      workingDir: ${PROJECTS_ROOT}/ansible-devspaces-demo/collections/ansible_collections/sample_namespace/sample_collection/extensions
+      workingDir: ${PROJECTS_ROOT}/ansible-devfile/collections/ansible_collections/sample_namespace/sample_collection/extensions
       group:
         kind: run
         isDefault: true
@@ -73,7 +52,7 @@ commands:
     exec:
       label: '3.Molecule: apply the role to the pod'
       commandLine: source $HOME/.bashrc && molecule converge
-      workingDir: ${PROJECTS_ROOT}/ansible-devspaces-demo/collections/ansible_collections/sample_namespace/sample_collection/extensions
+      workingDir: ${PROJECTS_ROOT}/ansible-devfile/collections/ansible_collections/sample_namespace/sample_collection/extensions
       group:
         kind: run
         isDefault: true
@@ -82,7 +61,7 @@ commands:
     exec:
       label: '4.Molecule: run the verification against the test pod'
       commandLine: source $HOME/.bashrc && molecule verify
-      workingDir: ${PROJECTS_ROOT}/ansible-devspaces-demo/collections/ansible_collections/sample_namespace/sample_collection/extensions
+      workingDir: ${PROJECTS_ROOT}/ansible-devfile/collections/ansible_collections/sample_namespace/sample_collection/extensions
       group:
         kind: run
         isDefault: true
@@ -91,7 +70,7 @@ commands:
     exec:
       label: '5.Molecule: reset the test pod back to a fresh instance'
       commandLine: source $HOME/.bashrc && molecule destroy
-      workingDir: ${PROJECTS_ROOT}/ansible-devspaces-demo/collections/ansible_collections/sample_namespace/sample_collection/extensions
+      workingDir: ${PROJECTS_ROOT}/ansible-devfile/collections/ansible_collections/sample_namespace/sample_collection/extensions
       group:
         kind: run
         isDefault: true
@@ -100,7 +79,7 @@ commands:
     exec:
       label: '6.Molecule: run the full molecule test'
       commandLine: source $HOME/.bashrc && molecule test
-      workingDir: ${PROJECTS_ROOT}/ansible-devspaces-demo/collections/ansible_collections/sample_namespace/sample_collection/extensions
+      workingDir: ${PROJECTS_ROOT}/ansible-ddevfile/collections/ansible_collections/sample_namespace/sample_collection/extensions
       group:
         kind: run
         isDefault: true
@@ -114,7 +93,7 @@ commands:
         fi
         cp /usr/local/lib/python3.11/site-packages/ansible_navigator/data/catalog_collections.py $HOME/.cache/ansible-navigator
         ansible-navigator --ee false
-      workingDir: ${PROJECTS_ROOT}/ansible-devspaces-demo
+      workingDir: ${PROJECTS_ROOT}/ansible-devfile
       component: tooling-container
 events:
   preStop:
