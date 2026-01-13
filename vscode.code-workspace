@@ -1,0 +1,23 @@
+{
+	"folders": [
+		{
+			"name": "ansible-demo",
+			"path": "/projects/ansible-demo"
+		}
+	],
+	"extensions": {
+		"recommendations": [
+			"redhat.vscode-yaml",
+			"streetsidesoftware.code-spell-checker",
+			"johnpapa.winteriscoming",
+      "redhat.ansible"
+		]
+	},
+	"settings": {
+		"workbench.colorTheme": "Winter is Coming (Dark Blue)",
+		"workbench.preferredDarkColorTheme": "Winter is Coming (Dark Blue)",
+		"workbench.preferredLightColorTheme": "Winter is Coming (Light)",
+		"editor.wordWrap": "on",
+		"files.autoSave": "on"
+	}
+}
