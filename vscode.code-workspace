@@ -10,7 +10,7 @@
 			"redhat.vscode-yaml",
 			"streetsidesoftware.code-spell-checker",
 			"johnpapa.winteriscoming",
-      "redhat.ansible"
+            "redhat.ansible"
 		]
 	},
 	"settings": {
