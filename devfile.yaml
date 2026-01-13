@@ -30,6 +30,10 @@ components:
           value: 'true'
         - name: TESTCONTAINERS_CHECKS_DISABLE
           value: 'true'
+        - name: HOME
+          value: "/projects/home"
+        - name: VSCODE_DEFAULT_WORKSPACE
+          value: "/projects/ansible-devspaces-demo"
       endpoints:
         - exposure: none
           name: kubedock
