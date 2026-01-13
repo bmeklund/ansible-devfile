@@ -4,7 +4,13 @@ metadata:
 projects:
   - name: ansible-devspaces-demo
     zip:
-      location: http://devspaces-dashboard.crw.svc:8080/dashboard/api/airgap-sample/project/download?id=ansible
+      location: http://devspaces-dashboard.crw.svc:8080/dashboard/api/airgap-sample/project/download?id=ansible  
+  - name: ansible-devfile
+    git:
+      remotes:
+        origin: https://github.com/bmeklund/ansible-devfile
+      checkoutFrom:
+        revision: main
 components:
   - name: tooling-container
     container:
