@@ -2,7 +2,7 @@
 	"folders": [
 		{
 			"name": "ansible-demo",
-			"path": "/projects/ansible-demo"
+			"path": "/projects/ansible-devspaces-demo"
 		}
 	],
 	"extensions": {
