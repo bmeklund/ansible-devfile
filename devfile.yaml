@@ -33,7 +33,7 @@ components:
         - name: HOME
           value: "/projects/home"
         - name: VSCODE_DEFAULT_WORKSPACE
-          value: "/projects/ansible-devspaces-demo"
+          value: "/projects/ansible-demo"
       endpoints:
         - exposure: none
           name: kubedock
